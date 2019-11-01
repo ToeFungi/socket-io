@@ -12,7 +12,7 @@ $ npm i
 ## Running App
 You can now use `nodemon` to run the server which will allow socket connections.
 ```bash
-$ npm run start
+$ npm run server
 ```
 You can open up the `index.html` within `client/` which will create a connection to the server.
 

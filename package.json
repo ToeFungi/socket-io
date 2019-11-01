@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server/server.js",
+    "server": "nodemon --exec babel-node server/server.js",
     "test": "mocha"
   },
   "author": "Alex Pickering",
