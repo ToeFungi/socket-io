@@ -21,7 +21,7 @@ class PlayerController {
   }
 
   updatePlayers() {
-    return this.playerList.map(player => player.updatePosition()
+    return this.playerList.map(player => player.update()
       .serialize())
   }
 

@@ -9,8 +9,12 @@ client.on('loop-update', data => {
   console.debug(data)
   ctx.clearRect(0, 0, 500, 500)
 
-  data.updatePacket.forEach(player => {
+  data.updatePacket.player.forEach(player => {
     ctx.fillText(player.name.toString(), player.x, player.y)
+  })
+
+  data.updatePacket.bullet.forEach(bullet => {
+    ctx.fillRect(bullet.x, bullet.y, 5, 5)
   })
 })
 

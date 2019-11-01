@@ -2,8 +2,8 @@ import express from 'express'
 import socketIO from 'socket.io'
 import { createServer } from 'http'
 
-import { Player } from './models/Player'
 import { PlayerController } from './PlayerController'
+import { BulletController } from './BulletController'
 
 const fps = process.env.SET_FPS = 25
 const port = process.env.SERVER_PORT || 3001
@@ -13,6 +13,7 @@ const server = createServer(app)
 const io = socketIO(server)
 
 const playerController = new PlayerController()
+const bulletController = new BulletController()
 
 server.listen(port, () => console.log(`Server listening on port ${port}`))
 
@@ -29,7 +30,13 @@ io.on('connection', socket => {
 
 // Game loop set to x frames per second
 const gameLoop = setInterval(() => {
-  const updatePacket = playerController.updatePlayers()
+  const player = playerController.updatePlayers()
+  const bullet = bulletController.updateBullets()
+
+  const updatePacket = {
+    player,
+    bullet
+  }
 
   // Emit game loop update to connected sockets
   io.emit('loop-update', { updatePacket })
