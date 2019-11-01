@@ -20,6 +20,8 @@ class Player extends Movable {
     if (this.isMovingLeft()) this.position.x -= this.getMaxSpeed()
     if (this.isMovingUp()) this.position.y -= this.getMaxSpeed()
     if (this.isMovingDown()) this.position.y += this.getMaxSpeed()
+
+    return this
   }
 
   getSocket() {

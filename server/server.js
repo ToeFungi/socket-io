@@ -34,8 +34,8 @@ const gameLoop = setInterval(() => {
 
 // Update the position of the player and return the serialized player
 const getUpdatedPosition = player => {
-  player.updatePosition()
-  return player.serialize()
+  return player.updatePosition()
+    .serialize()
 }
 
 // Remove player from the players array when the player disconnects
