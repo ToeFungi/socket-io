@@ -26,6 +26,13 @@ io.on('connection', socket => {
 
   // Handle keypress events from client
   socket.on('keyPress', data => playerController.handleKeyEvents(data, socket.id))
+
+  // Handle of messages
+  socket.on('create-message', ({ message }) => {
+    const username = playerController.getPlayerBySocketId(socket.id)
+      .getName()
+    io.emit('message-update', { message, username })
+  })
 })
 
 // Game loop set to x frames per second

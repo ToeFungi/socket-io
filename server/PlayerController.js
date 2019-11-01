@@ -5,10 +5,14 @@ class PlayerController {
     this.playerList = []
   }
 
+  getPlayerBySocketId(id) {
+    return this.playerList.find(player => player.getId() === id)
+  }
+
   onConnect(socket) {
     const position = {
-      x: 0,
-      y: 0
+      x: 200,
+      y: 200
     }
     const player = new Player(socket, position)
 
