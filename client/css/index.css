@@ -13,3 +13,11 @@
     max-height: 450px;
     overflow-y: auto;
 }
+
+#info-panel {
+    display: flex;
+}
+
+#info-panel > p {
+    margin-right: 1em;
+}

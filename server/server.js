@@ -7,6 +7,7 @@ import { BulletController } from './BulletController'
 
 const fps = process.env.SET_FPS = 25
 const port = process.env.SERVER_PORT || 3001
+
 const app = express()
 
 const server = createServer(app)
@@ -21,11 +22,17 @@ server.listen(port, () => console.log(`Server listening on port ${port}`))
 io.on('connection', socket => {
   playerController.onConnect(socket)
 
+  // Emit player details
+  socket.emit('player-details', {
+    name: playerController.getPlayerBySocketId(socket.id)
+      .getName()
+  })
+
   // On socket disconnect, remove player
   socket.on('disconnect', () => playerController.onDisconnect(socket))
 
   // Handle keypress events from client
-  socket.on('keyPress', data => playerController.handleKeyEvents(data, socket.id))
+  socket.on('key-press', data => playerController.handleKeyEvents(data, socket.id))
 
   // Handle of messages
   socket.on('create-message', ({ message }) => {
@@ -33,6 +40,9 @@ io.on('connection', socket => {
       .getName()
     io.emit('message-update', { message, username })
   })
+
+  // Handle ping
+  socket.on('custom-ping', data => socket.emit('custom-ping', data))
 })
 
 // Game loop set to x frames per second
